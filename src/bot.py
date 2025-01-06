@@ -8,7 +8,7 @@ from utils.logger_config import logger
 class Bot(Interation):
     """Classe que define um bot para interação automatizada com páginas da web."""
 
-    def __init__(self, config_path):
+    def __init__(self, config_path, chrome_driver_path):
         """
         Inicializa um objeto Bot.
 
@@ -21,7 +21,8 @@ class Bot(Interation):
             headless=False,
             incognito=False,
             download_path='',
-            desabilitar_carregamento_imagem=False
+            desabilitar_carregamento_imagem=False,
+            chrome_driver_path= chrome_driver_path
         ).driver
 
         # Carrega dados do arquivo de configuração

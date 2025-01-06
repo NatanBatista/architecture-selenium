@@ -15,7 +15,7 @@ import undetected_chromedriver as uc
 class Driver(Interation):
     """Classe para gerenciar o WebDriver e as opções do navegador."""
 
-    def __init__(self, browser='chrome', headless=False, incognito=False, download_path='', remote=False, desabilitar_carregamento_imagem=False):
+    def __init__(self, chrome_driver_path='./driver/chromedriver.exe', browser='chrome', headless=False, incognito=False, download_path='', remote=False, desabilitar_carregamento_imagem=False):
         """
         Inicializa um objeto Driver.
 
@@ -27,6 +27,7 @@ class Driver(Interation):
             remote (bool): Define se a execução será remota (padrão: False).
             desabilitar_carregamento_imagem (bool): Define se o carregamento de imagens será desabilitado (padrão: False).
         """
+        self.chrome_driver_path = chrome_driver_path
         if download_path == '':
             download_path = self.get_download_dir()
 
@@ -92,7 +93,7 @@ class Driver(Interation):
 
         try:
             # self.driver = uc.Chrome(options, user_data_dir, log_level=4, headless=headless)
-            self.driver = uc.Chrome(options, log_level=3, headless=headless, driver_executable_path=r'./driver/chromedriver.exe')
+            self.driver = uc.Chrome(options, log_level=3, headless=headless, driver_executable_path=self.chrome_driver_path)
         except WebDriverException as e:
             if 'This version of ChromeDriver only supports Chrome version' in str(e):
                 versao_chromedriver_suporta = re.search("ChromeDriver only supports Chrome version (\\d+)", str(e)).group(1)
@@ -114,7 +115,7 @@ class Driver(Interation):
             remote (bool): Define se a execução será remota.
         """
         # user_data_dir = os.path.join(os.getcwd(), 'appdata')
-        service = Service(executable_path=r'./driver/chromedriver.exe')
+        service = Service(executable_path=self.chrome_driver_path)
         options = ChromeOptions()
 
         if remote:

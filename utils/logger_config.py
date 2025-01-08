@@ -23,7 +23,7 @@ def setup_logger(log_file="app.log"):
 
     file_formatter = logging.Formatter(
         '%(asctime)s - %(levelname)s - %(message)s',
-        datefmt='%d/%m/%Y %H:%M:%S'
+        datefmt='%Y-%m-%dT%H:%M',
     )
 
     file_handler.setFormatter(file_formatter)
@@ -35,7 +35,7 @@ def setup_logger(log_file="app.log"):
     # Define as cores para cada nível de log usando colorlog
     color_formatter = colorlog.ColoredFormatter(
         "%(asctime)s - %(log_color)s%(levelname)s - %(message)s",
-        datefmt='%d/%m/%Y %H:%M:%S',
+        datefmt='%Y-%m-%dT%H:%M',
         log_colors={
             'DEBUG': 'cyan',
             'INFO': 'green',
